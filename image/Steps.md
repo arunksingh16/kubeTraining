@@ -20,3 +20,9 @@ Follow the steps to play with docker images.
     docker image rm <image_id>
 
 9. Start again
+10. Listing docker running containers 
+    docker ps | grep webserver
+
+11. Killing it
+    docker kill <id>
+

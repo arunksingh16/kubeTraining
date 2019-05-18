@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1 #Here we’re specifying the apiVersion as extensions/v1beta1 — remember, Deployments aren’t in v1
+kind: Deployment
+metadata:
+  name: name-webserver #we’re specifying the name of the Dep, as well as the label we’ll use to identify the dep to Kubernetes.
+spec:
+  replicas: 2 #number of replicas you want to run in pod
+  selector:
+    matchLabels:
+      app: label-webserver
+  template:     #OK, so now that we know we want 2 replicas, we need to answer the question: “Replicas of what?”  They’re defined by templates:
+    metadata:
+      labels:
+        app: label-webserver
+    spec:
+      containers:
+      - name: webserver
+        image: webserver:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
