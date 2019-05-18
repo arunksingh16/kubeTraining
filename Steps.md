@@ -25,10 +25,41 @@ kubectl get all --all-namespaces [show all existing resources]
 
 Lets do the deployment 
 
-10. Create file for deployment
+> Create file for deployment
     kubectl get deployments
     kubectl create -f deployment.yaml
+> It will create 2 pods
+    kubectl get pods
+
+> More details on deployment 
     kubectl describe deployment name-webserver
+    kubectl describe pod <pod_name>
+
+> Updating the deployment
+    kubectl apply -f deployment.yaml
+
+> Kubectl delete deployment
+    kubectl delete -f deployment.yaml
+
+> If you want to use your local image for deployment then You can point your docker client to the VM's docker daemon by running
+    eval $(minikube docker-env)
+
+> Then you can build your image normally and create your kubernetes resources normally using kubectl. Make sure that you have
+    imagePullPolicy: IfNotPresent
+
+
+
+Creating Service
+==============================
+
+> Create a yaml for service
+    kubectl get services
+    kubectl create -f service.yaml
+
+> Test the same with curl command
+
+> on worker node go and check 
+
 
 
 

@@ -26,3 +26,8 @@ Follow the steps to play with docker images.
 11. Killing it
     docker kill <id>
 
+> Tagging docker images
+docker tag 28d155f575e7 arun161087/webserver
+
+> Pushing this in repository
+docker push arun161087/webserver

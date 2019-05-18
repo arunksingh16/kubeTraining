@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: webserver
-        image: httpd
+        image: arun161087/webserver
+        imagePullPolicy: IfNotPresent
         resources:
           limits:
             memory: "128Mi"
