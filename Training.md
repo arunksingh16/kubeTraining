@@ -52,29 +52,29 @@ Agenda
 
 =========================================
 
-Kubernetes	Essential Kubernetes Concepts
- 	Architecture
- 	Dockerization
- 	Key components of Kubernetes Deployment
- 	Deploying and Scaling
- 	Alerts, logging, and resource management
-Docker	Template Management
- 	Yaml Syntax
- 	Building Container Images
- 	Dockerizing Node.js
- 	Optimise Builds With Docker OnBuild
- 	Ignoring Files During Build
- 	Create Data Containers
- 	Creating Networks Between Containers using Links
- 	Creating Networks Between Containers using Networks
- 	Persisting Data Using Volumes
- 	Manage Container Log Files
- 	Adding Docker Metadata & Labels
- 	Load Balancing Containers
- 	Orchestration using Docker Compose
- 	See Container Metrics With Docker Stats
- 	Creating Optimised Docker Images using Multi-Stage Builds
- 	Formatting PS Output
- 	Learn Docker Swarm 101
+##Kubernetes	Essential Kubernetes Concepts
+ - Architecture
+ - Dockerization
+ - Key components of Kubernetes Deployment
+ - Deploying and Scaling
+ - Alerts, logging, and resource management
+##Docker	Template Management
+ - Yaml Syntax
+ - Building Container Images
+ - Dockerizing Node.js
+ - Optimise Builds With Docker OnBuild
+ - Ignoring Files During Build
+ - Create Data Containers
+ - Creating Networks Between Containers using Links
+ - Creating Networks Between Containers using Networks
+ - Persisting Data Using Volumes
+ - Manage Container Log Files
+ - Adding Docker Metadata & Labels
+ - Load Balancing Containers
+ - Orchestration using Docker Compose
+ - See Container Metrics With Docker Stats
+ - Creating Optimised Docker Images using Multi-Stage Builds
+ - Formatting PS Output
+ - Learn Docker Swarm 101
 
 
