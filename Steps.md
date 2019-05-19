@@ -24,10 +24,12 @@ kubectl get all --all-namespaces [show all existing resources]
 
 
 Lets do the deployment 
+==============================
 
 > Create file for deployment
-    kubectl get deployments
-    kubectl create -f deployment.yaml
+kubectl get deployments
+kubectl create -f deployment.yaml
+
 > It will create 2 pods
     kubectl get pods
 
