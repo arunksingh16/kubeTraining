@@ -34,9 +34,9 @@ Lets do the deployment
 
 kubectl get pods
 
-- More details on deployment 
-    kubectl describe deployment name-webserver
-    kubectl describe pod <pod_name>
+> More details on deployment 
+ - kubectl describe deployment name-webserver
+ - kubectl describe pod <pod_name>
 
 - Updating the deployment
     kubectl apply -f deployment.yaml
