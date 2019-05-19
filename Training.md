@@ -50,7 +50,7 @@ Agenda
 - Kubernetes and Docker 
 - DevOps with Kubernetes 
 
-=========================================
+-----------------------------------------------------------------
 
 ##Kubernetes	Essential Kubernetes Concepts
  - Architecture
@@ -58,6 +58,7 @@ Agenda
  - Key components of Kubernetes Deployment
  - Deploying and Scaling
  - Alerts, logging, and resource management
+ 
 ##Docker	Template Management
  - Yaml Syntax
  - Building Container Images
