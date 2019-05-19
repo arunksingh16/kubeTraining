@@ -26,21 +26,23 @@ kubectl get all --all-namespaces [show all existing resources]
 Lets do the deployment 
 ==============================
 
-> Create file for deployment
+- Create file for deployment
+
 kubectl get deployments
 kubectl create -f deployment.yaml
 
-> It will create 2 pods
-    kubectl get pods
+- It will create 2 pods
 
-> More details on deployment 
+kubectl get pods
+
+- More details on deployment 
     kubectl describe deployment name-webserver
     kubectl describe pod <pod_name>
 
-> Updating the deployment
+- Updating the deployment
     kubectl apply -f deployment.yaml
 
-> Kubectl delete deployment
+- Kubectl delete deployment
     kubectl delete -f deployment.yaml
 
 > If you want to use your local image for deployment then You can point your docker client to the VM's docker daemon by running
