@@ -27,7 +27,11 @@ Follow the steps to play with docker images.
     docker kill <id>
 
 > Tagging docker images
-docker tag 28d155f575e7 arun161087/webserver
+- docker tag 28d155f575e7 arun161087/webserver
 
 > Pushing this in repository
-docker push arun161087/webserver
+- docker push arun161087/webserver
+
+> Docker image
+- docker image inspect <image_id>
+
