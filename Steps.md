@@ -105,9 +105,9 @@ Selection Via Labels(Label Selector)
 - kubectl get pods --show-labels
 - kubectl label pod pod-example-2 tier=frontend
 
-> NAME            READY     STATUS    RESTARTS   AGE       LABELS
-> pod-example     1/1       Running   0          9m        env=dev,name=lbl-pod,tier=backend
-> pod-example-2   1/1       Running   0          1m        env=dev,name=lbl-pod,tier=frontend
+NAME            READY     STATUS    RESTARTS   AGE       LABELS
+pod-example     1/1       Running   0          9m        env=dev,name=lbl-pod,tier=backend
+pod-example-2   1/1       Running   0          1m        env=dev,name=lbl-pod,tier=frontend
 
 - kubectl get pods  -l env=dev
 - kubectl get pods  -l tier=frontend
