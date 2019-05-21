@@ -84,6 +84,51 @@ Working on Replica Sets
 - kubectl get pods --show-labels
 
 
+Working on labels
+==============================
+> Create label.yaml
+- kubernetes create -f label.yaml
+- kubectl get pods -o wide
+- kubectl get pods --show-labels
+
+## Let us add another label to the above pod
+- kubectl label pod pod-example tier=backend
+## Labels can be overwritten or delete
+- kubectl label --overwrite pods pod-example env=prod
+
+
+Selection Via Labels(Label Selector)
+=====================================
+1. Equality Based Requirement
+
+> Create one more pod with diff name
+- kubectl get pods --show-labels
+- kubectl label pod pod-example-2 tier=frontend
+
+> NAME            READY     STATUS    RESTARTS   AGE       LABELS
+> pod-example     1/1       Running   0          9m        env=dev,name=lbl-pod,tier=backend
+> pod-example-2   1/1       Running   0          1m        env=dev,name=lbl-pod,tier=frontend
+
+- kubectl get pods  -l env=dev
+- kubectl get pods  -l tier=frontend
+- kubectl get pods  -l env!=prod
+- kubectl get pods  -l env!=prod,tier=backend
+## In above commands, labels separated by comma is a kind of AND satisfy operation.
+
+
+2. Set Based Requirement (The supported operators here are in , notin and exists .)
+
+- kubectl get pod -l 'env in (dev)'
+- kubectl get pod -l 'env in (dev,tier in (frontend)'
+- kubectl get pods -l 'env notin (dev)'
+
+## We can also select kubernetes resources via field selector but it has very limited support as of now. Field selector do not support set based requirement. Even the support for equality based requirement is not that extensible.
+
+- kubectl get pod --field-selector metadata.name=pod-example
+
+[Ref: https://medium.com/mayadata/kubernetes-label-selector-and-field-selector-81d6967bb2f]
+
+
 
 Working on Secrets
 ==============================
