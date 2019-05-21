@@ -20,7 +20,7 @@
 > [https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-apiversion-definition-guide.html]
 
 
-- kubectl get all --all-namespaces [show all existing resources]
+- cc [show all existing resources]
 
 
 Lets do the deployment 
@@ -76,10 +76,24 @@ https://www.katacoda.com/courses/kubernetes/networking-introduction
 
 
 
+Working on Replica Sets
+==============================
+> Create rs.yaml
+- kubectl create -f rs.yaml
+- kubectl get pods -o wide
+- kubectl get pods --show-labels
+
 
 
 Working on Secrets
 ==============================
+
+- echo -n 'admin' > ./username.txt
+- echo -n '1f2d1e2e67df' > ./password.txt
+- kubectl create secret generic db-user-pass --from-file=./username.txt --from-file=./password.txt
+- kubectl get secrets
+- kubectl describe secrets/db-user-pass
+
 
 > Creating a secret
 - kubectl create -f secret.yaml
@@ -88,8 +102,9 @@ Working on Secrets
 
 
 
-
-
 > kubectl logs -f <pod-name>
+
+
+
 
 
