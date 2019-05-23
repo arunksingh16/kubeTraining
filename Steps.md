@@ -14,6 +14,7 @@
 7. kubectl get pods --all-namespaces
 8. kubectl cluster-info
 9. kubectl get secret -o yaml
+10. kubectl get pods -o wide --show-labels --all-namespaces
 
 
 > An object definition in Kubernetes requires an apiVersion field. When Kubernetes has a release that updates what is available for you to use—changes something in its API—a new apiVersion is created.
@@ -34,8 +35,20 @@ Lets do the deployment
 - kubectl get pods
 
 > More details on deployment 
- - kubectl describe deployment name-webserver
- - kubectl describe pod <pod_name>
+- kubectl describe deployment name-webserver
+- kubectl describe pod <pod_name>
+
+> Scaling the deployment
+- kubectl scale deployment/name-webserver --replicas=4
+- kubectl get deployment name-webserver -o yaml
+
+> Rollout the changes
+- kubectl get rs
+- kubectl rollout history deployment/name-webserver
+- kubectl set image deployment/name-webserver webserver=nginx:1.10 --all
+- kubectl rollout undo deployment/name-webserver
+- 
+
 
 > Updating the deployment
 - kubectl apply -f deployment.yaml
@@ -78,10 +91,15 @@ https://www.katacoda.com/courses/kubernetes/networking-introduction
 
 Working on Replica Sets
 ==============================
+[Ref https://www.mirantis.com/blog/kubernetes-replication-controller-replica-set-and-deployments-understanding-replication-options/]
+
 > Create rs.yaml
 - kubectl create -f rs.yaml
 - kubectl get pods -o wide
 - kubectl get pods --show-labels
+- kubectl get pods -o wide --show-labels --all-namespaces
+
+
 
 
 Working on labels
@@ -105,9 +123,9 @@ Selection Via Labels(Label Selector)
 - kubectl get pods --show-labels
 - kubectl label pod pod-example-2 tier=frontend
 
-NAME            READY     STATUS    RESTARTS   AGE       LABELS
-pod-example     1/1       Running   0          9m        env=dev,name=lbl-pod,tier=backend
-pod-example-2   1/1       Running   0          1m        env=dev,name=lbl-pod,tier=frontend
+> NAME            READY     STATUS    RESTARTS   AGE       LABELS
+> pod-example     1/1       Running   0          9m        env=dev,name=lbl-pod,tier=backend
+> pod-example-2   1/1       Running   0          1m        env=dev,name=lbl-pod,tier=frontend
 
 - kubectl get pods  -l env=dev
 - kubectl get pods  -l tier=frontend
