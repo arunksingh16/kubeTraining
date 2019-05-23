@@ -1,2 +1,2 @@
 # kubeTraining
-This content in the repository is for learning purposes. 
+Content in the repository is only for learning purpose.
