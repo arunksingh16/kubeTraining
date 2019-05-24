@@ -1,7 +1,7 @@
->[Login in Katacoda platform and go to kubernetes playground]
->https://www.katacoda.com/courses/kubernetes/playground
->Yaml File creation 
->https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/
+> [Login in Katacoda platform and go to kubernetes playground]
+> https://www.katacoda.com/courses/kubernetes/playground
+> Yaml File creation 
+> https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/
 
 
 
@@ -15,7 +15,8 @@
 8. kubectl cluster-info
 9. kubectl get secret -o yaml
 10. kubectl get pods -o wide --show-labels --all-namespaces
-
+11. kubectl delete pods <name>
+12. kubectl get endpoints
 
 > An object definition in Kubernetes requires an apiVersion field. When Kubernetes has a release that updates what is available for you to use—changes something in its API—a new apiVersion is created.
 > [https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-apiversion-definition-guide.html]
@@ -47,8 +48,6 @@ Lets do the deployment
 - kubectl rollout history deployment/name-webserver
 - kubectl set image deployment/name-webserver webserver=nginx:1.10 --all
 - kubectl rollout undo deployment/name-webserver
-- 
-
 
 > Updating the deployment
 - kubectl apply -f deployment.yaml
@@ -170,4 +169,61 @@ Working on Secrets
 
 
 
+Creating a quick demo
+==============================
 
+1. Create a index.js
+
+const os = require('os');
+const http = require('http');
+
+const requestHandler = (req, res) => {
+    console.log('Request incoming from ' + req.connection.remoteAddress);
+    res.writeHead(200);
+    res.end('Success! You\'ve hit ' + os.hostname() + ' on ' + os.platform() + '!');
+};
+
+const server = http.createServer(requestHandler)
+
+server.listen(3000);
+
+
+2. Create Dockerfile
+
+FROM node:lts
+ADD index.js /index.js
+CMD node index.js
+
+3. Build the image
+
+docker build -t node-js-http .
+
+4. Tag the image
+
+docker tag node-js-http arun161087/node-js-http
+
+5. docker login
+
+6. Push the image in repository
+
+    docker push arun161087/node-js-http
+
+7. docker run --name run-node-js -p 3000:3000 -d arun161087/node-js-http
+
+8. Curl it now 
+
+    http://localhost:3000
+
+9. kubectl run run-node-js --image=arun161087/node-js-http --port=3000 --generator=run/v1
+
+10. kubectl get pods -w
+
+11. kubectl expose rc run-node-js --type=LoadBalancer --name run-node-js
+
+12. kubectl expose rc run-node-js --type=NodePort --name run-node-js-np
+
+13. kubectl get services
+
+14. kubectl scale rc run-node-js --replicas=10
+
+15. 
