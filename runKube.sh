@@ -1,6 +1,13 @@
-#!/usr/bin/env bash
-KUBECTL=`which kubectl`
-
+#!/bin/bash
+#
+# Date: 27-May-2019
+# Author: Arun K Singh [arun161087@gmail.com]
+# Description: Script for Kubernetes Demostration
+#
+# DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+#
+# Copyright (c) 2019 Arun and/or its affiliates. All rights reserved.
+#
 
 ${KUBECTL} create namespace wso2
 ${KUBECTL} create configmap logstash-conf --from-file=../configs/logstash/logstash.conf -n wso2
