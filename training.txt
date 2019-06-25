@@ -1,0 +1,148 @@
+Docker
+========
+
+Create a index.html file and run it in apache server
+
+First create a file named Dockerfile
+	docker build . -t webserver:v1
+
+Check the status 
+	docker images | grep webserver
+
+Restart Docker servers [Katacode issue]
+	service docker restart
+
+Run Image as a container
+	docker run -d -p 1234:80 webserver:v1
+
+List 
+	docker ps -a | grep webserver
+
+Test it
+	curl http://localhost:16200/ 
+
+Validate the Logs 
+	docker logs --details <container id>
+
+In case of failure remove container then image 
+    docker container rm <container_id>
+    docker image rm <image_id>
+
+Killing 
+ 	docker kill <id>
+
+Tagging 
+ 	docker tag 28d155f575e7 arun161087/webserver
+
+Push it in 
+ 	docker push arun161087/webserver
+
+Inspecting an image 
+	docker image inspect <image_id>
+
+
+========================================================================================
+
+
+Kubernetes 
+
+	service docker restart
+	kubectl get nodes
+	kubectl describe nodes
+	kubectl get namespace
+	kubectl get pods --all-namespaces
+
+
+Create a POD
+
+	kubectl create -f pod.yaml
+	kubectl get pods
+	kubectl get pods -o wide
+	kubectl describe pod <pod-name>
+	kubectl get pods -o wide --show-labels --all-namespaces
+	kubectl delete pods 
+
+
+
+
+Replication Controller (old way)
+	kubectl create -f rsc.yaml
+	kubectl describe replicationcontrollers/name-rsc
+
+
+Create Replica Set and try to delete pods [Replica Sets are declared in essentially the same way as Replication Controllers, except that they have more options for the selector.  For example, we could create a Replica Set like this:]
+
+	kubectl create -f rs.yaml
+	kubectl get rs
+	kubectl delete rs <name>
+	kubectl get pods
+	kubectl scale --replicas=4 rs/name-rs 
+	kubectl describe rs name-rs [check the Replicas: details]
+
+Reliability,Load balancing,Scaling
+
+	kubectl delete pods name-rs-4jlnt
+
+Create 2nd replicate set 
+	
+	kubectl create -f rs2.yaml
+	kubectl get pods -o wide --show-labels
+
+
+
+Deployments 
+
+	kubectl create -f dpl.yaml
+	kubectl get pods
+	kubectl scale deployment/name-dpl --replicas=4
+	kubectl describe deployment name-dpl [check the Replicas: details]
+
+  The StrategyType is RollingUpdate. This value can also be set to Recreate.
+
+  	kubectl rollout history deployment/name-dpl
+  	kubectl get deployments
+
+
+  	now create a service
+
+  		kubectl create -f svc.yaml
+  		kubectl get services
+  		kubectl get pods -o wide --show-labels
+  			now perform the curl operation
+
+  	Now perform rolling update
+  		kubectl apply -f dpl.yaml
+  		kubectl rollout history deployment/name-dpl
+  		kubectl rollout status deployments/name-dpl
+  		kubectl rollout history deployment/name-dpl --revision=2
+
+  		kubectl rollout undo deployment/name-dpl --to-revision=1
+
+
+
+
+Labels and Selectors
+	
+	Equality Based Requirement
+
+	kubectl get pods  -l tier=frontend
+	kubectl get pods  -l env!=prod
+	kubectl get pods  -l env!=prod,tier=backend
+	## In above commands, labels separated by comma is a kind of AND satisfy operation.
+
+	Set Based Requirement(The supported operators here are in , notin and exists .)
+
+	kubectl get pod -l 'env in (dev)'
+    kubectl get pod -l 'env in (dev,tier in (frontend)'
+    kubectl get pods -l 'env notin (dev)'
+
+
+
+
+
+========================================================================================
+
+docker pull katacoda/docker-http-server:latest
+docker tag katacoda/docker-http-server:latest arun161087/docker-http-server:latest
+docker run --name docker-http-server -p 7777:80 -d arun161087/docker-http-server:latest
+docker push arun161087/docker-http-server:latest
