@@ -9,6 +9,16 @@
 # Copyright (c) 2019 Arun and/or its affiliates. All rights reserved.
 #
 
+bingo() {
+cat << EOF
+How to: runKube.sh 
+Please run script in a proper manner.
+EOF
+exit 0
+}
+
+if [ "$#" -eq 0 ]; then bingo; fi
+
 ${KUBECTL} create namespace wso2
 ${KUBECTL} create configmap logstash-conf --from-file=../configs/logstash/logstash.conf -n wso2
 ${KUBECTL} create configmap logstash-yml --from-file=../configs/logstash/logstash.yml -n wso2
