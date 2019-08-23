@@ -50,3 +50,42 @@ artist_name_list_items = artist_name_list.find_all('div',class_='col-lg-8 mx-aut
 
 for artist_name in artist_name_list_items:
     print(artist_name.prettify())
+    
+    
+    ==========
+    
+    root@af26b0e6a2e1:~# sed -i 's/<a href="http:\/\/127.0.0.1:5000\/#">//g' a
+root@af26b0e6a2e1:~# vi a
+root@af26b0e6a2e1:~# sed -i 's/<div class="col-lg-8 mx-auto">//g' a
+
+
+[713231.03HW046157] ➤ sed -i 's/<br\/>//g' a.txt
+[713231.03HW046157] ➤ sed -i 's/class="h4"//g' a.txt                                                                                                                                                                                 ✔
+sed -i 's/p /p/g' a.txt;sed -i 's/<\/a>//g' a.txt; sed -i 's/<p>/<h2>/g' a.txt; sed -i 's/<\/p>/<\/h2>/g' a.txt; sed -i 's/<pclass="h2">/<h2>/g' a.txt
+
+
+sed -i 's//<h2>/g' a.txt
+
+sed 's/ /+/g' a.txt | sed 's/+++//g' | sed 's/++//g' > tmp
+tr -d '\n'  < tmp > tmp1
+dos2unix tmp1
+
+===
+
+
+from bs4 import BeautifulSoup
+import csv
+import requests
+html = open("table.html").read()
+soup=BeautifulSoup(html,'html.parser')
+table = soup.find("table")
+output_rows = []
+for table_row in table.findAll('tr'):
+    columns = table_row.findAll('td')
+    output_row = []
+    for column in columns:
+        output_row.append(column.text)
+        output_rows.append(output_row)
+with open('output.csv', 'w') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerows(output_rows)
