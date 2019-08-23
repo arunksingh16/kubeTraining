@@ -7,6 +7,13 @@ https://docs.fresco.me/folder/13161662
 
 https://talk.fresco.me/global/channel/2311404
 
+for mac
+
+sudo pip3 install bs4
+sudo pip3 install requests
+sudo install python3-bs4
+sudo easy_install -U requests
+
 
 
 pip install bs4
@@ -23,6 +30,23 @@ artist_name_list_items = artist_name_list.find_all('h2')
 
 last_links = soup.find_all('a')
 last_links.decompose()
+
+for artist_name in artist_name_list_items:
+    print(artist_name.prettify())
+
+
+====================
+
+import requests
+from bs4 import BeautifulSoup
+page = requests.get('http://marvel-ironman.surge.sh/')
+soup = BeautifulSoup(page.text, 'html.parser')
+
+artist_name_list = soup.find(id="marvel-card")
+#artist_name_list_items = artist_name_list.find_all('h2')
+
+artist_name_list_items = artist_name_list.find_all('div',class_='col-lg-8 mx-auto')
+
 
 for artist_name in artist_name_list_items:
     print(artist_name.prettify())
