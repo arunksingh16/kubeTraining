@@ -1,0 +1,28 @@
+
+Web Scrapping ( Scrape the data from a website and convert it to a csv format)
+Data Cleaning ( clean the data that you scrapped)
+Exploratory Data Analysis ( unearth interesting insights from the data you scrapped. )
+
+https://docs.fresco.me/folder/13161662
+
+https://talk.fresco.me/global/channel/2311404
+
+
+
+pip install bs4
+pip install requests
+apt-get install python3-bs4
+
+import requests
+from bs4 import BeautifulSoup
+page = requests.get('http://marvel-ironman.surge.sh/')
+soup = BeautifulSoup(page.text, 'html.parser')
+
+artist_name_list = soup.find(id="marvel-card")
+artist_name_list_items = artist_name_list.find_all('h2')
+
+last_links = soup.find_all('a')
+last_links.decompose()
+
+for artist_name in artist_name_list_items:
+    print(artist_name.prettify())
