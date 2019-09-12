@@ -1,0 +1,117 @@
+
+Web Scrapping ( Scrape the data from a website and convert it to a csv format)
+Data Cleaning ( clean the data that you scrapped)
+Exploratory Data Analysis ( unearth interesting insights from the data you scrapped. )
+
+https://docs.fresco.me/folder/13161662
+
+https://talk.fresco.me/global/channel/2311404
+
+for mac
+
+sudo pip3 install bs4
+sudo pip3 install requests
+sudo install python3-bs4
+sudo easy_install -U requests
+
+
+
+pip install bs4
+pip install requests
+apt-get install python3-bs4
+
+import requests
+from bs4 import BeautifulSoup
+page = requests.get('http://marvel-ironman.surge.sh/')
+soup = BeautifulSoup(page.text, 'html.parser')
+
+artist_name_list = soup.find(id="marvel-card")
+artist_name_list_items = artist_name_list.find_all('h2')
+
+last_links = soup.find_all('a')
+last_links.decompose()
+
+for artist_name in artist_name_list_items:
+    print(artist_name.prettify())
+
+
+====================
+
+import requests
+from bs4 import BeautifulSoup
+page = requests.get('http://marvel-ironman.surge.sh/')
+soup = BeautifulSoup(page.text, 'html.parser')
+
+artist_name_list = soup.find(id="marvel-card")
+#artist_name_list_items = artist_name_list.find_all('h2')
+
+artist_name_list_items = artist_name_list.find_all('div',class_='col-lg-8 mx-auto')
+
+
+for artist_name in artist_name_list_items:
+    print(artist_name.prettify())
+    
+    
+    ==========
+    
+    root@af26b0e6a2e1:~# sed -i 's/<a href="http:\/\/127.0.0.1:5000\/#">//g' a
+root@af26b0e6a2e1:~# vi a
+root@af26b0e6a2e1:~# sed -i 's/<div class="col-lg-8 mx-auto">//g' a
+
+
+[713231.03HW046157] ➤ sed -i 's/<br\/>//g' a.txt
+[713231.03HW046157] ➤ sed -i 's/class="h4"//g' a.txt                                                                                                                                                                                 ✔
+sed -i 's/p /p/g' a.txt;sed -i 's/<\/a>//g' a.txt; sed -i 's/<p>/<h2>/g' a.txt; sed -i 's/<\/p>/<\/h2>/g' a.txt; sed -i 's/<pclass="h2">/<h2>/g' a.txt
+
+
+sed -i 's//<h2>/g' a.txt
+
+sed 's/ /+/g' a.txt | sed 's/+++//g' | sed 's/++//g' > tmp
+tr -d '\n'  < tmp > tmp1
+dos2unix tmp1
+
+===
+
+
+from bs4 import BeautifulSoup
+import csv
+import requests
+html = open("table.html").read()
+soup=BeautifulSoup(html,'html.parser')
+table = soup.find("table")
+output_rows = []
+for table_row in table.findAll('tr'):
+    columns = table_row.findAll('td')
+    output_row = []
+    for column in columns:
+        output_row.append(column.text)
+        output_rows.append(output_row)
+with open('output.csv', 'w') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerows(output_rows)
+
+
+======
+
+tr -d '\n'  < temp > temp2
+
+cat temp2 | sed 's/" Align : <a href="http:\/\/127.0.0.1:5000\/#”>  "//g' | sed ’s/" Hair : <a href="http:\/\/127.0.0.1:5000\/#”>  //g' | sed 's/ Eye : <a href="http:\/\/127.0.0.1:5000\/#">  //g' | sed 's/ Identity : <a href="http:\/\/127.0.0.1:5000\/#”>  //g' |  sed 's/ Sex : <a href="http:\/\/127.0.0.1:5000\/#">  //g' | sed 's/ Alive : <a href="http:\/\/127.0.0.1:5000\/#">  //g' |  sed 's/ Appearances : <a href="http:\/\/127.0.0.1:5000\/#">  //g' |  sed 's/ First Appearance : <a href="http:\/\/127.0.0.1:5000\/#">  //g' | sed 's/ Year : <a href="http:\/\/127.0.0.1:5000\/#">  //g' > temp3
+
+cat temp3 | sed ’s/ <\/a>//g | sed ’s/<p class="h4”>//g > temp4
+
+
+
+cat temp2 | sed 's/ Align : <a href="http:\/\/127.0.0.1:5000\/#">//g' > temp3
+cat temp4 | sed 's/ Year : <a href="http:\/\/127.0.0.1:5000\/#">//g' | sed 's/ Alive : <a href="http:\/\/127.0.0.1:5000\/#">//g' | sed 's/ Eye : <a href="http:\/\/127.0.0.1:5000\/#">//g' | sed 's/ First Appearance : <a href="http:\/\/127.0.0.1:5000\/#">//g' | sed 's/ Sex : <a href="http:\/\/127.0.0.1:5000\/#">//g' > temp5
+
+cat temp5 | sed 's/ Appearances : <a href="http:\/\/127.0.0.1:5000\/#">//g' | sed 's/ Appearances : <a href="http:\/\/127.0.0.1:5000\/#">//g' > temp6
+
+
+cat temp7 | sed 's/<p class="h2">/<\/tr><tr><td>/g' > temp8
+cat temp8 | sed 's/<p class="h4">/<td>/g' > temp9
+cat temp9 | sed 's/<\/p>/<\/td>/g' > temp10
+cat temp10 | sed 's/<h2>/<\/tr><tr><td>/g' > temp11
+
+cat temp11 | sed 's/<\/h2>/<\/td>/g' > temp12
+cat temp12 | sed 's/<h4>/<td>/g' > temp13
+cat temp14 | sed 's/<\/h4>/<\/td>/g' > temp14
