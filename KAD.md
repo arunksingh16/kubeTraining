@@ -27,8 +27,13 @@ kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run -o
 
 kubectl describe pod kube-scheduler-master --namespace=kube-system
 
+kubectl get pods pod_name -o yaml
+
+
+alias ka='kubectl get pods -o wide --show-labels --all-namespaces'
 alias kc='kubectl'
 alias kgp='kubectl get pods'
+alias kgd='kubectl get deployments'
 alias kgps='kubectl get pods --all-namespaces'
 alias kdp='kubectl describe pod'
 alias kgs='kubectl get svc'
@@ -40,3 +45,9 @@ alias kgc='kubectl get componentstatuses’
 alias kctx='kubectl config current-context’
 alias kcon='kubectl config use-context’
 alias kgc='kubectl config get-context'
+
+
+
+kubectl drain node-1
+kubectl cordon node-1   -- new pods will not come
+kubectl uncordon node-1
