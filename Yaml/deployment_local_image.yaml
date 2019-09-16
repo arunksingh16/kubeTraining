@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: webserver
-        image: arun161087/webserver
+        image: arun161087/docker-http-server
         imagePullPolicy: IfNotPresent
         resources:
           limits:
