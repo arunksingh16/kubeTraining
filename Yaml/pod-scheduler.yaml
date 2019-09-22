@@ -1,0 +1,15 @@
+# In this example we are manually scheduling a pod to a specific node. This we may need to perform in case 
+# of scheduler not available
+apiVersion: v1
+kind: pod
+metadata:
+  name: arun
+  labels:
+    env: dev
+spec:
+  containers:
+    - name: arun
+      image: nginx
+      ports: 
+      - containerPort: 80 
+  nodeName: node01

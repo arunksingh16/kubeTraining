@@ -1,0 +1,26 @@
+Imp: grep on any describe command output need to be checked throughly.
+
+kubectl get pods -w
+kubectl get all --selector env=prod
+kubectl run nginx --image=nginx --generator=run-pod/v1 --dry-run
+kubectl get all -l env=prod,bu=finance,tier=frontend
+kubectl label node node01 color=blue
+# Create deployment -
+kubectl run blue --image=nginx --replicas=6
+# update deployment
+kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1
+kubectl edit deployment/nginx-deployment
+kubectl scale deployment nginx-deployment --replicas=10
+
+Taints and Tolerations (taint_tole.yaml)-
+-------------------------------------------
+kubectl taint nodes node01 spray=mortein:NoSchedule
+kubectl taint nodes node01 key:NoSchedule-
+
+Node selector (pod_node_selector.yaml)
+-------------------------------------------
+kubectl label nodes node01 size=huge
+
+Node Affinity (pod_node_aff.yaml)
+--------------------------------------------
+kubectl label nodes node01 size=huge
