@@ -8,9 +8,12 @@ kubectl label node node01 color=blue
 # Create deployment -
 kubectl run blue --image=nginx --replicas=6
 # update deployment
-kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1
+kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1 (this nginx name is container name)
 kubectl edit deployment/nginx-deployment
 kubectl scale deployment nginx-deployment --replicas=10
+# edit pod /deployment
+kubectl edit pod pod1 (it will save the temp file which you can deploy directly on server)
+kubectl edit deployment my-deployment
 
 Taints and Tolerations (taint_tole.yaml)-
 -------------------------------------------
@@ -24,3 +27,6 @@ kubectl label nodes node01 size=huge
 Node Affinity (pod_node_aff.yaml)
 --------------------------------------------
 kubectl label nodes node01 size=huge
+
+PODS Memory Requirement (pod.yaml)
+--------------------------------------------
