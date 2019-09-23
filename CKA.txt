@@ -1,32 +1,46 @@
-Imp: grep on any describe command output need to be checked throughly.
+# Prepare system for alias 
+
+alias kubectl='k'
+alias kgn='kubectl get nodes -o wide'
+alias kgp='kubectl get pods -o wide'
+alias kgpl='kubectl get pods -o wide --show-labels'
+alias kgsl='kubectl get services -o wide --show-labels'
+alias kgdl='kubectl get deployments -o wide --show-labels'
+
+# Imp: grep on any describe command output need to be checked throughly.
 
 kubectl get pods -w
 kubectl get all --selector env=prod
 kubectl run nginx --image=nginx --generator=run-pod/v1 --dry-run
 kubectl get all -l env=prod,bu=finance,tier=frontend
 kubectl label node node01 color=blue
-# Create deployment -
+
+# Create and expose deployment -
 kubectl run blue --image=nginx --replicas=6
+kubectl expose pod redis --port=6379 --name redis-service
+kubectl expose deployment webapp --type=NodePort --port=8080 --name=webapp-service --dry-run -o yaml > webapp-service.yaml
+
 # update deployment
 kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1 (this nginx name is container name)
 kubectl edit deployment/nginx-deployment
 kubectl scale deployment nginx-deployment --replicas=10
+
 # edit pod /deployment
 kubectl edit pod pod1 (it will save the temp file which you can deploy directly on server)
 kubectl edit deployment my-deployment
 
-Taints and Tolerations (taint_tole.yaml)-
+# Taints and Tolerations (taint_tole.yaml)-
 -------------------------------------------
 kubectl taint nodes node01 spray=mortein:NoSchedule
 kubectl taint nodes node01 key:NoSchedule-
 
-Node selector (pod_node_selector.yaml)
+# Node selector (pod_node_selector.yaml)
 -------------------------------------------
 kubectl label nodes node01 size=huge
 
-Node Affinity (pod_node_aff.yaml)
+# Node Affinity (pod_node_aff.yaml)
 --------------------------------------------
 kubectl label nodes node01 size=huge
 
-PODS Memory Requirement (pod.yaml)
+# PODS Memory Requirement (pod.yaml)
 --------------------------------------------
