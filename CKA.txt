@@ -14,7 +14,18 @@ kubectl get events
 kubectl get all --selector env=prod
 kubectl run nginx --image=nginx --generator=run-pod/v1 --dry-run
 kubectl get all -l env=prod,bu=finance,tier=frontend
+
+
+# Label 
+kubectl get pods -l env=prod,bu=finance,tier=frontend
+kubectl label pod kubia-manual-v2 env=debug --overwrite
+kubectl label pod pod1 color=blue
 kubectl label node node01 color=blue
+
+
+
+# Using port-forwarder
+kubectl port-forward nginx 8080:80
 
 # Create and expose deployment -
 kubectl run blue --image=nginx --replicas=6
