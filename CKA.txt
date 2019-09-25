@@ -1,6 +1,6 @@
 # Prepare system for alias 
 
-alias kubectl='k'
+alias k='kubectl'
 alias kgn='kubectl get nodes -o wide'
 alias kgp='kubectl get pods -o wide'
 alias kgpl='kubectl get pods -o wide --show-labels'
@@ -10,6 +10,7 @@ alias kgdl='kubectl get deployments -o wide --show-labels'
 # Imp: grep on any describe command output need to be checked throughly.
 
 kubectl get pods -w
+kubectl get events
 kubectl get all --selector env=prod
 kubectl run nginx --image=nginx --generator=run-pod/v1 --dry-run
 kubectl get all -l env=prod,bu=finance,tier=frontend
