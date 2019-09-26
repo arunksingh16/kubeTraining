@@ -15,6 +15,8 @@ kubectl get all --selector env=prod
 kubectl run nginx --image=nginx --generator=run-pod/v1 --dry-run
 kubectl get all -l env=prod,bu=finance,tier=frontend
 
+# Logs
+kubectl logs mypod --previous (seeing logs of crashed container)
 
 # Label 
 kubectl get pods -l env=prod,bu=finance,tier=frontend
@@ -22,10 +24,20 @@ kubectl label pod kubia-manual-v2 env=debug --overwrite
 kubectl label pod pod1 color=blue
 kubectl label node node01 color=blue
 
-
+# namespace
+kubectl create namespace custom-namespace
+kubectl create -f kubia-manual.yaml -n custom-namespace
+kcd='kubectl config set-context $(kubectl config current-context) --namespace <namespace name>
 
 # Using port-forwarder
 kubectl port-forward nginx 8080:80
+
+# edit 
+kubectl edit rc kubia
+export KUBE_EDITOR="/usr/bin/nano" (Configuring kubectl edit to use a different text editor)
+
+# Job
+kubectl get job
 
 # Create and expose deployment -
 kubectl run blue --image=nginx --replicas=6
@@ -56,3 +68,17 @@ kubectl label nodes node01 size=huge
 
 # PODS Memory Requirement (pod.yaml)
 --------------------------------------------
+
+
+
+
+# JSONPATH
+
+kubectl get nodes -o wide  -o=jsonpath='{.items[*].status.capacity.cpu}'
+kubectl get nodes -o wide  -o=jsonpath='{.items[*].metadata.name}{"\n"}{.items[*].status.capacity.cpu}'
+kubectl get nodes --sort-by= .status.capacity.cpu
+
+kubectl get nodes -o=jsonpath='{.items[*].metadata.name}'
+kubectl get nodes -o=jsonpath='{.items[*].status.nodeInfo.osImage}'
+
+kubectl config view --kubeconfig=/root/my-kube-config
