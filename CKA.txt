@@ -17,6 +17,7 @@ kubectl get all -l env=prod,bu=finance,tier=frontend
 
 # Logs
 kubectl logs mypod --previous (seeing logs of crashed container)
+kubectl logs fortune html-generator --previous
 
 # Label 
 kubectl get pods -l env=prod,bu=finance,tier=frontend
@@ -38,6 +39,10 @@ export KUBE_EDITOR="/usr/bin/nano" (Configuring kubectl edit to use a different 
 
 # Job
 kubectl get job
+
+# Service and exec (services don’t operate at the HTTP level.)
+kubectl exec kubia-7nog1 -- curl -s http://10.111.249.153
+
 
 # Create and expose deployment -
 kubectl run blue --image=nginx --replicas=6
@@ -69,13 +74,19 @@ kubectl label nodes node01 size=huge
 # PODS Memory Requirement (pod.yaml)
 --------------------------------------------
 
+# Ingress
+kubectl get ingresses
 
-
+# Secret
+$ openssl genrsa -out tls.key 2048
+$ openssl req -new -x509 -key tls.key -out tls.cert -days 360 -subj CN=kubia.example.com
+kubectl create secret tls tls-secret --cert=tls.cert --key=tls.key
 
 # JSONPATH
 
 kubectl get nodes -o wide  -o=jsonpath='{.items[*].status.capacity.cpu}'
 kubectl get nodes -o wide  -o=jsonpath='{.items[*].metadata.name}{"\n"}{.items[*].status.capacity.cpu}'
+kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}'
 kubectl get nodes --sort-by= .status.capacity.cpu
 
 kubectl get nodes -o=jsonpath='{.items[*].metadata.name}'
