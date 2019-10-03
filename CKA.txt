@@ -58,6 +58,10 @@ kubectl scale deployment nginx-deployment --replicas=10
 kubectl edit pod pod1 (it will save the temp file which you can deploy directly on server)
 kubectl edit deployment my-deployment
 
+# configmap
+kubectl create configmap fortune-config --from-literal=sleep-interval=25
+kubectl create configmap my-config --from-file=config-file.conf
+
 # Taints and Tolerations (taint_tole.yaml)-
 -------------------------------------------
 kubectl taint nodes node01 spray=mortein:NoSchedule
