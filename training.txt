@@ -3,6 +3,7 @@ Docker
 
 Create a index.html file and run it in apache server
 
+
 First create a file named Dockerfile
 	docker build . -t webserver:v1
 
@@ -19,7 +20,7 @@ List
 	docker ps -a | grep webserver
 
 Test it
-	curl http://localhost:16200/ 
+	curl http://localhost:1234/
 
 Validate the Logs 
 	docker logs --details <container id>
@@ -41,10 +42,16 @@ Inspecting an image
 	docker image inspect <image_id>
 
 
+	One more example
+	docker run --name my-nginx-c2 -p 80:80 -v /root/html/:/usr/share/nginx/html:ro -d nginx
+
+
 ========================================================================================
 
 
 Kubernetes 
+
+	Show kubernetes process. It can be configured independently or via kubeadm
 
 	service docker restart
 	kubectl get nodes
@@ -54,6 +61,8 @@ Kubernetes
 
 
 Create a POD
+
+	kubectl run nginx --image=nginx --generator=run-pod/v1 --dry-run
 
 	kubectl create -f pod.yaml
 	kubectl get pods
