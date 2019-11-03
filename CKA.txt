@@ -43,6 +43,10 @@ kubectl get job
 # Service and exec (services don’t operate at the HTTP level.)
 kubectl exec kubia-7nog1 -- curl -s http://10.111.249.153
 
+# Explain 
+
+kubectl explain pod.spec | grep -i livenessProbe
+kubectl explain pod.spec.containers | grep -i livenessProbe
 
 # Create and expose deployment -
 kubectl run blue --image=nginx --replicas=6
